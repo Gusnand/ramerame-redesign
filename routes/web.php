@@ -24,4 +24,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::middleware(['auth'])->group(function () {
+    Route::get('/super/dashboard', function () {
+        return Inertia::render('Super/Index');
+    })->name('super.dashboard');
+    Route::get('/super/project', function () {
+        return Inertia::render('Super/Project/Index');
+    })->name('super.project');
+});
+
+require __DIR__ . '/auth.php';
